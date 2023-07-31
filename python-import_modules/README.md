@@ -1,0 +1,1 @@
+ the import statement allows us to access functionality from other Python files or modules. It enables code reusability and better organization by separating functionalities into different files.
