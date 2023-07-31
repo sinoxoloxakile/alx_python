@@ -13,5 +13,5 @@
   except ZeroDivisionError:
     result = None
   finally:
-    print("Inside result:", result)
+    print{"Inside result:", result}
   return result
