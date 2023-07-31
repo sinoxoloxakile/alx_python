@@ -1,7 +1,13 @@
 def fibonacci_sequence(n)
-    fibonacci_numbers = []
-  a, b = 0, 1
-  for i in range(n):
-    fibonacci_numbers.append(a)
-    a, b = b, a + b
-  return fibonacci_numbers
+    sequence = []
+    if n <= 0:
+        return sequence
+    sequence.append(0)
+    if n > 1:
+        sequence.append(1)
+
+    while len(sequence) < n:
+        next_num = sequence[-1] + sequence[-2]
+        sequence.append(next_num)
+
+    return sequence
