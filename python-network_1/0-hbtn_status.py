@@ -1,15 +1,8 @@
-#!/usr/bin/python3
-"""
-import request package
-"""
 import requests
-
-
-def main():
-    url = 'https://alu-intranet.hbtn.io/status'
-    req = requests.get(url)
-    print("Body response:\n\t- type: {}\n\t- content: {}".format(type(req.text), req.text))
-
-
-if __name__ == "__main__":
-    main()
+response = requests.get("https://alu-intranet.hbtn.io/status")
+print(response.text)
+- {
+    "status": "OK",
+    "version": "1.0.0",
+    "timestamp": "2023-03-08T10:15:36.123Z"
+}
