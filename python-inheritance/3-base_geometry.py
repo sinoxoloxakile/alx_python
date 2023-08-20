@@ -1,7 +1,7 @@
 """
     this is a semple class to represent a empty class
 """
-class BaseGeometry
+class BaseGeometry:
     """
     this is a semple class to represent a empty class
     """
