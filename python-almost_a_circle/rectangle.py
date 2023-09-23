@@ -1,114 +1,129 @@
-#!/usr/bin/python3
 """
-Module on a Rectangle class that inherits from Base
+    This module to creates a smple class rectangle
 """
 from models.base import Base
 
-class Rectangle (Base):
+class Rectangle(Base):
     """
-    This is the calss defining the Rectangle
-
-    Attribute include:
-    __width -> width
-    __height -> height
+    class inherits frombase
     """
 
     def __init__(self, width, height, x=0, y=0, id=None):
-        """
-        This function intializes a Instance of the Rectangle
-
-        Args:
-         width (int): The width of the rectangle.
-        height (int): The height of the rectangle.
-        x (int): The x-coordinate of the rectangle.
-        y (int): The y-coordinate of the rectangle.
-        id (int): The value for the id attribute.
-        """
-        super().__init__(id)
-        self.width = width
+        """instantiate values"""
         self.height = height
-        self.x = x
+        self.width = width
         self.y = y
+        self.x = x
+        super().__init__(id)
 
-    @property
-    def width(self):
-        return self.__width
-
-    @width.setter
-    def width(self, value):
-        # Implement any validation logic you need
-        if not isinstance(value, int):
-            raise TypeError("width must be an integer")
-        if value <= 0:
-            raise ValueError("width must be > 0")
-        self.__width = value
 
     @property
     def height(self):
+        """
+            mathed getter to get private width
+        """
         return self.__height
 
     @height.setter
     def height(self, value):
-        # Implement validation logic you need
-        if not isinstance(value, int):
-            raise TypeError("height must be an integer")
-        if value <= 0:
-            raise ValueError("height must be > 0")
+        """
+            mathed getter to get private width
+        """
+        self.toValidation('height', value)
         self.__height = value
-
     @property
-    def x(self):
-        return self.__x
+    def width(self):
+        """
+            mathed getter to get private width
+        """
+        return self.__width
 
-    @x.setter
-    def x(self, value):
-        # Implement validation logic you need
-        if not isinstance(value, int):
-            raise TypeError("x must be an integer")
-        if value < 0:
-            raise ValueError("x must be >= 0")
-        self.__x = value
+    @width.setter
+    def width(self, value):
+        """
+            mathed getter to get private width
+        """
+        self.toValidation('width', value)
+        self.__width = value
+
 
     @property
     def y(self):
+        """
+            mathed getter to get private width
+        """
         return self.__y
 
     @y.setter
     def y(self, value):
-        # Implement validation logic you need
-        if not isinstance(value, int):
-            raise TypeError("y must be an integer")
-        if value < 0:
-            raise ValueError("y must be >= 0")
+        """
+            mathed getter to get private width
+        """
+        self.toValidation('y', value)
         self.__y = value
+    
+    @property
+    def x(self):
+        """
+            mathed getter to get private width
+        """
+        return self.__x
 
+    @x.setter
+    def x(self, value):
+        """
+            mathed getter to get private width
+        """
+        self.toValidation('x', value)
+        self.__x = value
+
+    @staticmethod
+    def toValidation(name, value):
+        """
+            to validation values of height and weight and x and y
+        """
+        if not isinstance(value, int):
+            raise TypeError("{} must be an integer".format(name))
+        if value < 0 and (name == 'x' or name == 'y'):
+            raise ValueError("{} must be >= 0".format(name))
+        if value <= 0 and name != 'x' and name != 'y':
+            raise ValueError("{} must be > 0".format(name))
+        
     def area(self):
-        """ Function for the area of Rectangle"""
+        """
+            to get area of the rectangle
+        """
         return self.__width * self.__height
-    
+
     def display(self):
-        """ Function for the display  """
-        for _ in range(self.__y):
-            print()
-        for _ in range(self.__height):
-            print(" " * self.__x + "#" * self.__width)
-    
+        """
+            Update the class Rectangle by adding the public method def 
+            display(self): that prints in stdout the Rectangle instance with
+            the character # - you don’t need to handle x and y here.
+        """
+        for x in range(self.__y):
+            print("")
+        for z in range(self.__height):
+            print(" "*self.__x + "#"*self.__width)
+
+
     def __str__(self):
-        return f"[Rectangle] ({self.id}) {self.__x}/{self.__y} - {self.__width}/{self.__height}"
+        """
+            Update the class Rectangle by overriding the __str__ method so that it
+            returns [Rectangle] (<id>) <x>/<y> - <width>/<height>
+        """
+        return ("[Rectangle] ({}) {}/{} - {}/{}".format
+                (self.id, self.__x, self.__y, self.__width, self.__height))
     
     def update(self, *args, **kwargs):
-        """This function that assigns argument"""
-        if len(args) > 0:
-            self.id = args[0]
-        if len(args) > 1:
-            self.width = args[1]
-        if len(args) > 2:
-            self.height = args[2]
-        if len(args) > 3:
-            self.x = args[3]
-        if len(args) > 4:
-            self.y = args[4]
-        
-        if len(args) == 0 or len(kwargs) > 0:
-            for key, value in kwargs.items():
+        """
+        updates the values using args and kwargs
+        """
+        attrbut = [ "id","width", "height", "x", "y"]
+        if args:
+            for i, arg in enumerate(args):
+                setattr(self, attrbut[i], arg)
+
+        for key, value in kwargs.items():
+            if key in attrbut:
                 setattr(self, key, value)
